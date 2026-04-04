@@ -3,413 +3,136 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cadence — Stay in touch, without the guilt</title>
-  <meta name="description" content="Cadence helps you keep up with the people who matter. Sync your message history from Mac, pair your iPhone, and never lose touch again.">
+  <title>Cadence</title>
+  <meta name="description" content="Cadence is a small app for keeping up with people without turning it into a chore.">
   <style>
     :root {
-      --bg: #f3f4f2;
-      --card: rgba(255,255,255,0.82);
-      --text: #17252b;
-      --muted: #475052;
-      --soft: #6b7577;
-      --line: rgba(23,33,39,0.07);
+      --bg: #fbfbf8;
+      --text: #171717;
+      --muted: #5f5f5f;
       --accent: #2d5a50;
-      --accent-light: #e0ebe7;
-      --warm: #b98957;
-      --warm-light: #f5efe6;
-      --rose: #c75762;
-      --shadow-sm: 0 2px 8px rgba(23,33,39,0.04);
-      --shadow: 0 16px 48px rgba(23,33,39,0.07);
-      --shadow-lg: 0 24px 64px rgba(23,33,39,0.1);
-      --radius: 24px;
-      --radius-sm: 16px;
+      --line: rgba(23, 23, 23, 0.12);
     }
 
-    * { box-sizing: border-box; margin: 0; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
-      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 32px 20px 56px;
+      background: var(--bg);
       color: var(--text);
-      background:
-        radial-gradient(ellipse at 15% 0%, rgba(185,137,87,0.12), transparent 40%),
-        radial-gradient(ellipse at 85% 5%, rgba(45,90,80,0.1), transparent 35%),
-        var(--bg);
-      min-height: 100vh;
+      font: 16px/1.6 ui-monospace, SFMono-Regular, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", monospace;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* — Nav — */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1080px;
+    main {
+      max-width: 680px;
       margin: 0 auto;
-      padding: 20px 24px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 17px;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      color: var(--text);
-    }
-    .logo-mark {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent), var(--warm));
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-weight: 900; font-size: 15px;
-    }
-    nav a.nav-link {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 100ms;
-    }
-    nav a.nav-link:hover { color: var(--text); }
-
-    /* — Layout — */
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
     }
 
-    /* — Hero — */
-    .hero {
-      text-align: center;
-      padding: 60px 0 48px;
+    h1,
+    h2,
+    p,
+    ol,
+    ul {
+      margin: 0 0 18px;
     }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 6px 14px;
-      border-radius: 999px;
-      margin-bottom: 20px;
-    }
-    .badge .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
+
     h1 {
-      font-size: clamp(44px, 7vw, 72px);
-      line-height: 1.0;
-      letter-spacing: -0.045em;
-      margin-bottom: 18px;
-      font-weight: 800;
-    }
-    h1 .accent { color: var(--accent); }
-    .hero .sub {
-      font-size: 19px;
-      line-height: 1.55;
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 32px;
-    }
-
-    /* — Buttons — */
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 52px;
-      padding: 0 24px;
-      border-radius: 999px;
-      text-decoration: none;
+      font-size: 28px;
+      line-height: 1.2;
       font-weight: 700;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
-      transition: transform 120ms ease, box-shadow 120ms ease;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn-primary {
-      background: var(--text);
-      color: white;
-      box-shadow: var(--shadow-sm);
-    }
-    .btn-primary:hover { box-shadow: var(--shadow); }
-    .btn-secondary {
-      background: white;
-      color: var(--text);
-      border: 1px solid var(--line);
-    }
-    .btn svg { width: 18px; height: 18px; fill: currentColor; }
-    .hint {
-      margin-top: 14px;
-      font-size: 13px;
-      color: var(--soft);
     }
 
-    /* — Steps — */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 56px;
-    }
-    .step {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      box-shadow: var(--shadow-sm);
-      text-align: left;
-    }
-    .step-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px; height: 36px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 15px;
-      margin-bottom: 16px;
-    }
-    .step:nth-child(1) .step-num { background: var(--accent-light); color: var(--accent); }
-    .step:nth-child(2) .step-num { background: var(--warm-light); color: var(--warm); }
-    .step:nth-child(3) .step-num { background: #fce8ea; color: var(--rose); }
-    .step h3 {
-      font-size: 18px;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-    .step p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 14.5px;
+    h2 {
+      margin-top: 28px;
+      font-size: 16px;
+      font-weight: 700;
     }
 
-    /* — Features — */
-    .features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 56px;
-    }
-    .feature {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow-sm);
-    }
-    .feature-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      margin-bottom: 14px;
-    }
-    .feature h3 {
-      font-size: 17px;
-      letter-spacing: -0.015em;
-      margin-bottom: 6px;
-    }
-    .feature p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 14.5px;
+    p,
+    li {
+      max-width: 64ch;
     }
 
-    /* — Setup Guide — */
-    .setup {
-      margin-top: 56px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 36px;
-      box-shadow: var(--shadow-sm);
-    }
-    .setup h2 {
-      font-size: 24px;
-      letter-spacing: -0.03em;
-      margin-bottom: 6px;
-    }
-    .setup > p {
+    p.small,
+    li small {
       color: var(--muted);
-      margin-bottom: 24px;
-      font-size: 15px;
     }
-    .setup-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .setup-col h4 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+
+    a {
       color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 14px;
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
     }
-    .setup-col ol {
-      padding-left: 20px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 14.5px;
-    }
-    .setup-col li { margin-bottom: 4px; }
-    .setup-col li strong { color: var(--text); }
 
-    /* — Footer — */
-    footer {
-      margin-top: 56px;
-      padding-top: 24px;
+    a:hover {
+      color: #1f433b;
+    }
+
+    a.primary {
+      font-weight: 700;
+    }
+
+    ul,
+    ol {
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 10px;
+    }
+
+    hr {
+      margin: 26px 0;
+      border: 0;
       border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      color: var(--soft);
     }
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    footer a:hover { color: var(--text); }
 
     code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.92em;
-      background: rgba(23,33,39,0.05);
-      padding: 2px 6px;
-      border-radius: 6px;
+      font: inherit;
+      background: rgba(23, 23, 23, 0.05);
+      padding: 1px 5px;
     }
 
-    @media (max-width: 768px) {
-      .steps, .features, .setup-grid { grid-template-columns: 1fr; }
-      .hero { padding: 40px 0 32px; }
-      footer { flex-direction: column; gap: 8px; text-align: center; }
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 16px 40px;
+        font-size: 15px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a class="logo" href="#">
-      <span class="logo-mark">C</span>
-      Cadence
-    </a>
-    <a class="nav-link" href="https://github.com/user-416/cadence-releases">GitHub</a>
-  </nav>
+  <main>
+    <h1>Cadence</h1>
+    <p>Cadence is a small app for keeping up with people without turning friendship into homework.</p>
+    <p>I made it for myself and my friends. It reads message metadata from your Mac, helps you notice who you have not talked to in a while, and lets you set a rhythm for staying in touch.</p>
 
-  <main class="wrap">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="badge"><span class="dot"></span> Now in Beta</div>
-      <h1>Friendship,<br>without <span class="accent">the guilt.</span></h1>
-      <p class="sub">Cadence shows you who needs attention and when. Sync your message history from your Mac, pair your iPhone, and stay in touch with the people who matter.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="https://github.com/user-416/cadence-releases/releases/latest/download/Cadence.dmg">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.82.487 3.53 1.338 5.002L2.04 22l5.12-1.342A9.954 9.954 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          Download for Mac
-        </a>
-        <a class="btn btn-secondary" href="https://testflight.apple.com/join/YOUR_CODE">
-          <svg viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" fill="currentColor"/></svg>
-          iPhone via TestFlight
-        </a>
-      </div>
-      <p class="hint">macOS 13+ required. Signed and notarized by Apple.</p>
-    </section>
+    <p><a class="primary" href="https://github.com/user-416/cadence-releases/releases/latest/download/Cadence.dmg">Download for Mac</a><br><a href="https://testflight.apple.com/join/YOUR_CODE">Get the iPhone app on TestFlight</a><br><a href="https://github.com/user-416/cadence-releases">GitHub</a></p>
 
-    <!-- Steps -->
-    <section class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Install on your Mac</h3>
-        <p>Download <code>Cadence.dmg</code>, drag to Applications, and grant Full Disk Access so Cadence can read message metadata. No message content is ever accessed.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Scan the QR code</h3>
-        <p>Click "Pair iPhone" on the Mac app. On your iPhone, open Cadence and tap the QR scanner icon. Point your camera at the screen — both devices need the same Wi-Fi.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Stay in rhythm</h3>
-        <p>Cadence scores each relationship based on recency and the cadence you set. Low scores surface who needs attention. High scores mean you're keeping up.</p>
-      </div>
-    </section>
+    <p class="small">macOS 13+ required. Signed and notarized by Apple.</p>
 
-    <!-- Features -->
-    <section class="features">
-      <div class="feature">
-        <div class="feature-icon" style="background: var(--accent-light);">🔒</div>
-        <h3>Private by default</h3>
-        <p>Cadence only reads metadata — handles and timestamps. Message content is never accessed, stored, or uploaded. The pairing flow is local-first over Wi-Fi.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon" style="background: var(--warm-light);">📊</div>
-        <h3>Smart scoring</h3>
-        <p>Each person gets a "keeping up" score from 0–100. Without a cadence, it tracks recency. With one, it reflects whether you're on time, early, or overdue.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon" style="background: #e8e4f8;">🔔</div>
-        <h3>Gentle reminders</h3>
-        <p>Set a cadence (weekly, monthly, quarterly, or custom) and opt into reminders. Cadence nudges you at the right time based on your last conversation.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon" style="background: #fce8ea;">📝</div>
-        <h3>Private notes</h3>
-        <p>Jot down context for each person — recent topics, names to remember, or threads to pick back up. Notes stay on your device.</p>
-      </div>
-    </section>
+    <hr>
 
-    <!-- Setup Guide -->
-    <section class="setup">
-      <h2>Setup Guide</h2>
-      <p>Get running in under two minutes.</p>
-      <div class="setup-grid">
-        <div class="setup-col">
-          <h4>Mac</h4>
-          <ol>
-            <li>Download and open <strong>Cadence.dmg</strong></li>
-            <li>Drag Cadence to <strong>Applications</strong></li>
-            <li>Open the app from <strong>Applications</strong></li>
-            <li>Grant <strong>Full Disk Access</strong> when prompted (System Settings &gt; Privacy &gt; Full Disk Access)</li>
-            <li>Click <strong>Sync Now</strong> to read your message metadata</li>
-            <li>Click <strong>Pair iPhone</strong> to show the QR code</li>
-          </ol>
-        </div>
-        <div class="setup-col">
-          <h4>iPhone</h4>
-          <ol>
-            <li>Install Cadence via <strong>TestFlight</strong></li>
-            <li>Open the app and allow <strong>Contacts</strong> access</li>
-            <li>Tap the <strong>QR scanner icon</strong> (top-right corner)</li>
-            <li>Point your camera at the QR code on the Mac</li>
-            <li>Wait a few seconds — your contacts will import automatically</li>
-            <li>Set cadences for the people you want to keep up with</li>
-          </ol>
-        </div>
-      </div>
-    </section>
+    <ol>
+      <li>Download <code>Cadence.dmg</code>, move the app to Applications, and grant Full Disk Access so it can read message metadata. It does not read message content.</li>
+      <li>Open the Mac app and click Pair iPhone.</li>
+      <li>Install the iPhone app through TestFlight, open it, and allow Contacts access.</li>
+      <li>Scan the QR code from the Mac while both devices are on the same Wi-Fi.</li>
+      <li>Set cadences for the people you care about and let the app quietly keep track.</li>
+    </ol>
 
-    <footer>
-      <span>Cadence Beta · Built by <a href="https://github.com/user-416">@user-416</a></span>
-      <a href="https://github.com/user-416/cadence-releases/issues">Report an Issue</a>
-    </footer>
+    <ul>
+      <li>Cadence only reads handles and timestamps. Message content is never accessed, stored, or uploaded.</li>
+      <li>If something is broken or confusing, <a href="https://github.com/user-416/cadence-releases/issues">report an issue</a>.</li>
+    </ul>
   </main>
 </body>
 </html>
